@@ -2,23 +2,22 @@ var path = require('path');
 var extend = require('util')._extend;
 var loadModels = require('./services/loadModelsService');
 
-var appFile = path.resolve(process.argv[2]);
 var options = {};
 
-var app = require(appFile);
 if(require.main === module) {
+  var appFile = path.resolve(process.argv[2]);
+  var app = require(appFile);
 
   if (app.booting) {
     app.on('booted', runGenerator);
   } else {
-    runGenerator();
+    runGenerator(app);
   }
 }
 
 
 
-function runGenerator() {
-  var pathArray = appFile.split(path.sep);
+function runGenerator(app) {
   options = extend({
     ngModuleName: 'lbServices',
     apiUrl: '/',
