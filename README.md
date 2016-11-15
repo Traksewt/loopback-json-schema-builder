@@ -57,3 +57,5 @@ module.exports = function (BaseModel) {
 
 }
 ```
+
+**NOTE: This module only does loopback models TO json schema. If you are looking at going from json schema TO loopback models, checkout this neat project [loopback-jsonschema](https://github.com/backstage/loopback-jsonschema)**
