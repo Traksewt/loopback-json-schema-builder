@@ -1,6 +1,6 @@
 {
   "name": "loopback-json-schema-builder",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Converts loopback models into a json schema model file",
   "main": "index.js",
   "scripts": {
