@@ -5,18 +5,6 @@ module.exports = {
 
 const inflection = require('inflection');
 
-function getFormattedModelName(modelName, options) {
-  // Always capitalize first letter of model name
-  var resourceModelName = modelName[0].toUpperCase() + modelName.slice(1);
-
-  // Prefix with the module name and delimiter if namespacing is on
-  if (options.namespaceModels) {
-    resourceModelName = options.ngModuleName +
-      options.namespaceDelimiter + resourceModelName;
-  }
-  return resourceModelName;
-}
-
 function loadModels(app, options) {
   const ret = {};
   Object.keys(app.models).forEach((modelName) => {
@@ -34,9 +22,9 @@ function generateSchema(modelName, model) {
     properties: {},
     required: []
   };
+
   const properties = model.definition.properties;
   Object.keys(properties).forEach((key) => {
-    // console.log('-----' + key + ': type: ' + properties[key]['type'].name + ': ' + Object.keys(properties[key]));
     jsonSchema.properties[key] = {
       title: inflection.titleize(inflection.underscore(key)),
       type: properties[key]['type'].name.toLowerCase()
@@ -44,10 +32,8 @@ function generateSchema(modelName, model) {
     if (properties[key]['required']) {
       jsonSchema.required.push(key);
     }
-  })
+  });
 
   return jsonSchema;
-
-
 }
 
