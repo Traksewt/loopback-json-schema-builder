@@ -6,7 +6,7 @@ This module can create [json schema](http://json-schema.org/) objects based on [
 This is useful if you want to quickly create forms for your loopback models using something
 like [angular schema form](http://schemaform.io/).
 
-## Usage
+## CLI Usage
 
 node . (path to loopback root)/server/server.js
 
@@ -22,3 +22,38 @@ returns a map of model name to model schema
 ###loadModel(model)
 
 returns a jsonSchema
+
+
+## integrate with remote methods
+
+```
+var schemaBuilder = require('loopback-json-schema-builder');
+module.exports = function (BaseModel) {
+...
+
+  BaseModel.jsonSchema = function(cb) {
+    const schema = schemaBuilder.loadModel(BaseModel.modelName, this);
+    cb(null, JSON.stringify(schema, null, 2));
+  }
+
+  BaseModel.setup = function() {
+    // We need to call the base class's setup method
+    BaseModel.base.setup.call(this);
+    var BaseModelInternal = this;
+
+    BaseModelInternal.remoteMethod(
+      'jsonSchema',
+      {
+        description: 'Get the json schema for the given loopback model.',
+        accessType: 'READ',
+        returns: {arg: 'schema', type: 'string', root: true},
+        isStatic: true,
+        http: {path: '/json-schema', verb: 'GET'}
+      }
+    );
+
+  }
+...
+
+}
+```
