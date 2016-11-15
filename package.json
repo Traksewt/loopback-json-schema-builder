@@ -6,7 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "traksewt@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/traksewt/loopback-json-schema-builder.git"
+  },
+  "keywords": [
+    "loopback",
+    "angular",
+    "json-schema"
+  ],
+  "author": "Kenny Sabir <traksewt@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/traksewt/loopback-json-schema-builder/issues"
+  },
   "license": "ISC",
   "dependencies": {
     "inflection": "^1.10.0"
