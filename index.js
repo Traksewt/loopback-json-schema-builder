@@ -1,12 +1,11 @@
-var path = require('path');
-var extend = require('util')._extend;
-var loadModels = require('./services/loadModelsService');
+const path = require('path');
+const extend = require('util')._extend;
+const loadModels = require('./services/loadModelsService');
 
-var options = {};
-
+let options = {};
 if(require.main === module) {
-  var appFile = path.resolve(process.argv[2]);
-  var app = require(appFile);
+  const appFile = path.resolve(process.argv[2]);
+  const app = require(appFile);
 
   if (app.booting) {
     app.on('booted', runGenerator);
@@ -28,7 +27,7 @@ function runGenerator(app) {
     modelsToIgnore: [],
   }, options);
 
-  var models = loadModels.loadModels(app, options);
+  const models = loadModels.loadModels(app, options);
 
   console.log('app models: ' + JSON.stringify(models, null, 2));
 
