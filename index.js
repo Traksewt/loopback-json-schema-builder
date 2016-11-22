@@ -1,3 +1,4 @@
+'use strict';
 const path = require('path');
 const extend = require('util')._extend;
 const loadModels = require('./services/loadModelsService');
